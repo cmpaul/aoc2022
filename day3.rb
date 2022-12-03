@@ -7,17 +7,30 @@ def priority(item_type)
     item_type.ord - 38
 end
 
-def shared_item(rucksack)
-    first = rucksack[0..rucksack.size/2 - 1]
-    second = rucksack[rucksack.size/2..]
-    first.chars.each do |l|
-        return l if second.include?(l)
+# def shared_item(rucksack)
+#     first = rucksack[0..rucksack.size/2 - 1]
+#     second = rucksack[rucksack.size/2..]
+#     first.chars.each do |l|
+#         return l if second.include?(l)
+#     end
+#     raise "No common item found! #{rucksack}"
+# end
+
+# part 1
+# def priority_sum(rucksacks)
+#     rucksacks.map { |rucksack| priority(shared_item(rucksack)) }.sum
+# end
+
+def shared_item(rucksacks)
+    rucksacks[0].chars.each do |l|
+        next unless rucksacks[1].include?(l)
+        return l if rucksacks[2].include?(l)
     end
     raise "No common item found! #{rucksack}"
 end
 
 def priority_sum(rucksacks)
-    rucksacks.map { |rucksack| priority(shared_item(rucksack)) }.sum
+    rucksacks.each_slice(3).to_a.map { |rucksacks| priority(shared_item(rucksacks)) }.sum
 end
 
 rucksacks = %w[
