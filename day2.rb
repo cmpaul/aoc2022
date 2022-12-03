@@ -18,6 +18,12 @@ YOU_WIN = {
     'Z' => 'B', # Scissors beat paper
 }
 
+SHAPE_MAP = {
+    'A' => 'X',
+    'B' => 'Y',
+    'C' => 'Z',
+}
+
 YOU_LOST = 0
 YOU_DRAW = 3
 YOU_WON = 6
@@ -30,7 +36,15 @@ end
 # The score for a single round is the score for the shape you selected (1 for Rock, 2 for Paper, and 3 for Scissors)
 # plus the score for the outcome of the round (0 if you lost, 3 if the round was a draw, and 6 if you won).
 def score(round)
-    their_shape, your_shape = round.strip.split(' ')
+    their_shape, your_outcome = round.strip.split(' ')
+    if your_outcome == 'X' # Lose
+        your_shape = THEY_WIN[their_shape]
+    elsif your_outcome == 'Y' # Draw
+        your_shape = SHAPE_MAP[their_shape]
+    else # Win
+        your_shape = YOU_WIN.key(their_shape)
+    end
+    puts their_shape, your_shape
     SHAPE_SCORE[your_shape] + outcome(their_shape, your_shape)
 end
 
