@@ -23,9 +23,8 @@ def move_stacks(input)
         instruction = input[i].strip
         next unless instruction.start_with?("move")
 
-        puts "instruction = #{instruction}"
         count, orig, dest = instruction.match(/move (\d+) from (\d+) to (\d+)/).captures.map(&:to_i)
-        puts "count = #{count}, orig = #{orig}, dest = #{dest}"
+
         orig_stack = STACKS[orig - 1]
         dest_stack = STACKS[dest - 1]
         temp = []
@@ -35,10 +34,6 @@ def move_stacks(input)
         for num in 1..count do
             dest_stack.unshift(temp.pop)
         end
-        puts STACKS.inspect
-        puts
-        # STACKS[orig - 1] = orig_stack
-        # STACKS[dest - 1] = dest_stack
     end
 end
 
@@ -57,9 +52,6 @@ input = [
 input = File.readlines('day5-input.txt')
 
 build_stacks(input)
-puts STACKS.inspect
-
 move_stacks(input)
-puts STACKS.inspect
 
 puts STACKS.map { |row| row.shift }.join
