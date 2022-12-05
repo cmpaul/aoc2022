@@ -28,9 +28,12 @@ def move_stacks(input)
         puts "count = #{count}, orig = #{orig}, dest = #{dest}"
         orig_stack = STACKS[orig - 1]
         dest_stack = STACKS[dest - 1]
+        temp = []
         for num in 1..count do
-            moved = orig_stack.shift
-            dest_stack.unshift(moved)
+            temp.push(orig_stack.shift)
+        end
+        for num in 1..count do
+            dest_stack.unshift(temp.pop)
         end
         puts STACKS.inspect
         puts
