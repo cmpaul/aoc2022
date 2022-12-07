@@ -18,4 +18,4 @@ input = [
 
 input = File.readlines('day6-input.txt')
 
-puts marker_for(input[0])
+puts marker_for(input[0], 14)
